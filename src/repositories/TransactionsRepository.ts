@@ -6,6 +6,12 @@ interface Balance {
   total: number;
 }
 
+interface CreateTransictionDTO {
+  title: string;
+  value: number;
+  type: 'income' | 'outcome';
+}
+
 class TransactionsRepository {
   private transactions: Transaction[];
 
@@ -21,8 +27,14 @@ class TransactionsRepository {
     // TODO
   }
 
-  public create(): Transaction {
-    // TODO
+  public create({ title, value, type }: CreateTransictionDTO): Transaction {
+    // Instância uma nova transaction
+    const transaction = new Transaction({ title, value, type });
+    // Armazena na lista de repositorios
+    this.transactions.push(transaction);
+
+    // Retorna transição criada
+    return transaction;
   }
 }
 
