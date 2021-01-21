@@ -10,7 +10,11 @@ const transactionsRepository = new TransactionsRepository();
 transactionRouter.get('/', (request, response) => {
   try {
     // Listar todas as transições presentes no repositories/database
-    const transactions = transactionsRepository.all()
+    const transactions = transactionsRepository.all();
+    // Balance - Balanço final das transações
+    const balance = transactionsRepository.getBalance();
+
+    return response.json({ transactions, balance });
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
